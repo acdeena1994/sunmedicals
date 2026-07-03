@@ -183,6 +183,31 @@
             z-index: 0;
         }
 
+        /* ===== BACKGROUND LOGO IMAGE ===== */
+.bg-logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Ensures it doesn't block clicks */
+    z-index: 1; /* Behind the capsule (z-index:2) but above the background symbols */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-logo-img {
+    width: 90%;
+    max-width: 600px; /* Prevents it from getting too huge on large screens */
+    height: auto;
+    object-fit: contain;
+    opacity: 0.12; /* Light opacity - adjust this number (0.05 to 0.25) to change visibility */
+    filter: blur(1px); /* Optional: adds a subtle soft glow */
+    transition: opacity 0.5s ease;
+}
+
         /* ===== HERO CONTENT ===== */
         .hero-content {
             position: relative;
@@ -734,7 +759,7 @@
             <i class="bi bi-heart-fill symbol"></i>
             <i class="bi bi-sun-fill symbol"></i>
             <i class='fas fa-prescription'></i>
-            
+            <link rel="icon" href="logo.png" type="image/png">
         </div>
 
         <!-- SUN MEDICALS Reveal (overlay) -->
@@ -743,10 +768,17 @@
             <small>Your Health &bull; Our Priority</small>
         </div>
 
+
         <div class="hero-content">
+
+            <!-- BACKGROUND LOGO IMAGE (Light Opacity) -->
+<div class="bg-logo-container">
+    <img src="logo.png" alt="Sun Medicals Logo" class="bg-logo-img">
+</div>
 
             <!-- LEFT: "MEDICAL" -->
             <div class="hero-text medical" id="medicalText">HEALTH</div>
+
 
             <!-- CAPSULE — now landscape (horizontal) -->
             <div class="capsule-wrapper" id="capsuleWrapper">
@@ -1095,6 +1127,15 @@
         }, 0);
 
         return tl;
+
+    // Inside buildScrollAnimation() function, after the "Background shift" line:
+
+tl.to(".bg-logo-img", {
+    opacity: 0,
+    scale: 1.1,
+    duration: 0.8,
+    ease: "power2.out"
+}, 0);
     }
 
 
